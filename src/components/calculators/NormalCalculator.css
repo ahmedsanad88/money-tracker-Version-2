@@ -1,0 +1,485 @@
+.normalCalculator {
+    width: 100%;
+    /* height: 50vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.normalCalculator::before {
+    content: '';
+    border: 70px solid hsla(229, 23%, 18%, 0.4);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 0;
+}
+
+
+.normalCalculator section {
+    width: 50%;
+    height: 452px;
+    min-width: 400px;
+    max-width: 700px;
+    border: 1px solid hsl(229, 23%, 58%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    z-index: 100;
+}
+
+.normalCalculator section header {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(3, 93, 248, 0.1), rgba(0, 125, 250, 0.488));
+    box-shadow: inset 0px 0px 12px hsl(229, 23%, 15%);
+    border-bottom: 1px solid hsl(229, 23%, 58%);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px 5px 0px 0px;
+}
+
+#operation {
+    height: 50px;
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+#total {
+    height: 50px;
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: 800;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.normalCalculator section main {
+    width: 100%;
+    height: 350px;
+    display: flex;
+}
+
+main .calculator_left {
+    flex: 0.65;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calculator_left .left_numbers {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    --main-bg: hsl(229, 23%, 20%);
+    background-color: var(--main-bg);
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.calculator_left .left_numbers:hover {
+    --main-bg: hsl(229, 23%, 15%);
+    background-color: var(--main-bg);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+}
+
+.number_zero {
+    border-radius: 0px 0px 0px 5px;
+}
+
+#DeleteNumber {
+    color: red;
+}
+
+main .calculator_right {
+    flex: 0.35;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calculator_right .right_operator {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    --main-bg: hsl(229, 23%, 14%);
+    background-color: var(--main-bg);
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.calculator_right .right_operator:hover {
+    --main-bg: hsl(229, 23%, 8%);
+    background-color: var(--main-bg);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+    -moz-box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+#equalSign {
+    background-color: var(--color);
+    border-radius: 0px 0px 5px 0px;
+    font-size: 30px;
+}
+
+#equalSign:hover {
+    background-color: hsl(210, 100%, 35%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+}
+
+#resetSign {
+    background-color: black;
+    font-size: 35px;
+}
+
+#resetSign:hover {
+    background-color: rgb(52, 52, 52);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+}
+
+
+/* Media Query */
+
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .normalCalculator {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .normalCalculator::before {
+        content: '';
+        border: 70px solid hsla(229, 23%, 18%, 0.4);
+        position: absolute;
+        width: 100%;
+        top: 0;
+        z-index: 0;
+    }
+
+
+    .normalCalculator section {
+        width: 100%;
+        height: 80%;
+        min-width: 200px;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* min-width: 400px;
+        max-width: 700px; */
+        border: 1px solid hsl(229, 23%, 58%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        z-index: 100;
+    }
+
+    .normalCalculator section header {
+        width: 100%;
+        height: 70px;
+        background: linear-gradient(to bottom, rgba(3, 93, 248, 0.1), rgba(0, 125, 250, 0.488));
+        box-shadow: inset 0px 0px 12px hsl(229, 23%, 15%);
+        border-bottom: 1px solid hsl(229, 23%, 58%);
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+    #operation {
+        height: 35px;
+        color: whitesmoke;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    #total {
+        height: 35px;
+        color: whitesmoke;
+        font-size: 20px;
+        font-weight: 800;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .normalCalculator section main {
+        width: 100%;
+        /* height: 100%; */
+        display: flex;
+    }
+
+    main .calculator_left {
+        flex: 0.65;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .calculator_left .left_numbers {
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        --main-bg: hsl(229, 23%, 20%);
+        background-color: var(--main-bg);
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .calculator_left .left_numbers:hover {
+        --main-bg: hsl(229, 23%, 15%);
+        background-color: var(--main-bg);
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+        -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
+    }
+
+    .number_zero {
+        border-radius: 0px 0px 0px 5px;
+    }
+
+    #DeleteNumber {
+        color: red;
+    }
+
+    main .calculator_right {
+        flex: 0.35;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .calculator_right .right_operator {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        --main-bg: hsl(229, 23%, 14%);
+        background-color: var(--main-bg);
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .calculator_right .right_operator:hover {
+        --main-bg: hsl(229, 23%, 8%);
+        background-color: var(--main-bg);
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+        -moz-box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+        -webkit-box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    #equalSign {
+        background-color: var(--color);
+        border-radius: 0px 0px 5px 0px;
+        font-size: 20px;
+    }
+
+    #equalSign:hover {
+        background-color: hsl(210, 100%, 35%);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+        -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+        -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+    }
+
+    #resetSign {
+        background-color: black;
+        font-size: 15px;
+    }
+
+    #resetSign:hover {
+        background-color: rgb(52, 52, 52);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+        -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+        -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 1);
+    }
+}
+
+@media (min-width: 20px) and (max-width: 374px) {
+    .normalCalculator {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .normalCalculator::before {
+        content: '';
+        border: 70px solid hsla(229, 23%, 18%, 0.4);
+        position: absolute;
+        width: 100%;
+        top: 0;
+        z-index: 0;
+    }
+
+
+    .normalCalculator section {
+        width: 100%;
+        height: 80%;
+        min-width: 100px;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid hsl(229, 23%, 58%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        z-index: 100;
+    }
+
+    .normalCalculator section header {
+        width: 100%;
+        height: 70px;
+        background: linear-gradient(to bottom, rgba(3, 93, 248, 0.1), rgba(0, 125, 250, 0.488));
+        box-shadow: inset 0px 0px 12px hsl(229, 23%, 15%);
+        border-bottom: 1px solid hsl(229, 23%, 58%);
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+    #operation {
+        height: 35px;
+        color: whitesmoke;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    #total {
+        height: 35px;
+        color: whitesmoke;
+        font-size: 20px;
+        font-weight: 800;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .normalCalculator section main {
+        width: 100%;
+        /* height: 100%; */
+        display: flex;
+    }
+
+    main .calculator_left {
+        flex: 0.65;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .calculator_left .left_numbers {
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        --main-bg: hsl(229, 23%, 20%);
+        background-color: var(--main-bg);
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .number_zero {
+        border-radius: 0px 0px 0px 5px;
+    }
+
+    #DeleteNumber {
+        color: red;
+    }
+
+    main .calculator_right {
+        flex: 0.35;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .calculator_right .right_operator {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        --main-bg: hsl(229, 23%, 14%);
+        background-color: var(--main-bg);
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    #equalSign {
+        background-color: var(--color);
+        border-radius: 0px 0px 5px 0px;
+        font-size: 20px;
+    }
+
+    #resetSign {
+        background-color: black;
+        font-size: 15px;
+    }
+}

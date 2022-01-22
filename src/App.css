@@ -1,0 +1,20 @@
+:root {
+    --main-bg: hsl(229, 23%, 23%);
+    /* --main-bg:  */
+    --side-bg: hsl(228, 38%, 15%);
+    --color: hsl(210, 100%, 49%);
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
+
+.app {
+    display: flex;
+}

@@ -1,0 +1,130 @@
+.userSidebar {
+    flex: 0.05;
+    max-width: 220px;
+    position: fixed;
+    padding: 10px;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(190, 190, 190, 0.1);
+    background-color: var(--side-bg);
+    z-index: 500;
+    transition: flex 1s ease-in-out;
+}
+
+.expand {
+    flex: 0.25;
+}
+
+.manu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 70px;
+}
+
+.manu div {
+    width: 40px;
+    height: 5px;
+    background-color: white;
+    border-radius: 5px;
+    margin: 3px;
+    transition: transform 0.5s linear;
+}
+
+.hide {
+    display: none;
+}
+
+.topMove {
+    transform: rotate(45deg) translate(7px);
+}
+
+.bottomMove {
+    transform: rotate(-45deg) translate(7px);
+}
+
+.alignClose {
+    transform: translate(-7px);
+}
+
+.userSidebar__main {
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.userSidebar__user {
+    color: var(--color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userSidebar__userImg {
+    margin: 10px;
+}
+
+.userSidebar__userDetails {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userSidebar__userDetails h3 {
+    padding-bottom: 15px;
+}
+
+#emailSpace {
+    width: 100%;
+    -webkit-word-break: break-all;
+    -moz-word-break: break-all;
+    -o-word-break: break-all;
+    word-break: break-all;
+}
+
+.userSidebar__nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.IconBtn {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-radius: 0px !important;
+    color: var(--color) !important;
+    background-color: hsla(229, 23%, 23%, 0.5) !important;
+    margin-bottom: 10px !important;
+    font-size: 1.2rem !important;
+}
+
+.IconBtn:hover {
+    background-color: var(--color) !important;
+    color: white !important;
+}
+
+.clicked {
+    color: white !important;
+    background-color: var(--color) !important;
+}
+
+.userSidebar__logout {
+    width: 100%;
+}
+

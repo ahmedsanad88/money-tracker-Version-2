@@ -1,0 +1,291 @@
+.updateData {
+    flex: 1;
+    margin-left: 75px;
+    min-height: 100vh;
+    max-width: 1700px;
+    padding: 20px;
+    background-color: var(--main-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.updateData::before {
+    content: '';
+    border: 50px solid hsla(229, 23%, 18%, 0.4);
+    height: 60%;
+    position: absolute;
+    transform: rotate(30deg);
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.updateData::after {
+    content: '';
+    border: 50px solid hsla(229, 23%, 18%, 0.4);
+    height: 60%;
+    position: absolute;
+    transform: rotate(30deg);
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.updateData__main {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.img img {
+    width: 35%;
+    filter: drop-shadow(5px 3px 10px rgba(0, 0, 0, 0.4));
+    opacity: 0.5;
+}
+
+.updateData_title h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color);
+    margin: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.updateMessage {
+    background-color: green;
+    color: white;
+    padding: 7px 15px 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.scaleOut {
+    transition: transform 1s;
+    transform: scale(0);
+}
+
+.showMessage {
+    animation: popUp 1s 1;
+    display: block;
+}
+
+.updateData__main form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input_container .earnInput {
+    margin: 15px;
+    width: 270px;
+    height: 150px;
+    border: 1px solid hsl(229, 23%, 58%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    --main-bg: hsl(229, 23%, 20%);
+    background-color: var(--main-bg);
+    padding: 0px 0px 10px 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.earnInput input {
+    width: 80%;
+    height: 30%;
+    padding: 0px 5px;
+    background-color: hsla(210, 100%, 49%, 0.1);
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.146);
+    color: white;
+    border-radius: 5px;
+}
+
+.earnInput input:focus {
+    box-shadow: 0px 0px 5px hsl(210, 100%, 49%);
+}
+
+.earnInput h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color);
+    text-align: center;
+}
+
+.btn {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.btn input {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--color);
+    background-color: hsla(210, 100%, 49%, 0.1);
+    border: 1px solid var(--color);
+    outline: none;
+    border-radius: 5px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.btn input:hover {
+    opacity: 1;
+}
+
+#reset {
+    color: rgb(255, 0, 0);
+    background-color: hsla(0, 100%, 49%, 0.1);
+    border: 1px solid red;
+}
+
+/* MediaQuery */
+
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 940px) {
+      .updateData__main {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+    }
+
+    .updateData_title h3 {
+        text-align: center;
+    }
+
+    .input_container {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px 10px;
+    }
+    
+    .input_container .earnInput {
+        margin: 5px;
+        padding: 5px;
+    }
+
+    .earnInput input {
+        width: 95%;
+    }
+
+    .btn {
+        width: 90%;
+    }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .updateData__main {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        overflow: scroll;
+    }
+
+    .img img {
+        width: 65%;
+    }
+
+    .updateData_title h3 {
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--color);
+        margin: 10px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+    }
+
+    .input_container {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px 10px;
+    }
+    
+    .input_container .earnInput {
+        margin: 5px;
+        padding: 5px;
+        width: 220px;
+    }
+
+    .earnInput h2 {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--color);
+    }
+
+    .btn {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .btn input {
+        padding: 10px 15px;
+        font-size: 15px;
+        font-weight: 800;
+    }
+}
