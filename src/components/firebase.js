@@ -9,26 +9,15 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_API_KEY,
-//   authDomain: "control-your-money-spend.firebaseapp.com",
-//   projectId: "control-your-money-spend",
-//   storageBucket: "control-your-money-spend.appspot.com",
-//   messagingSenderId: process.env.REACT_APP_MESSAGE_ID,
-//   appId: process.env.REACT_APP_APP_ID,
-//   measurementId: "G-K7FR2HZLC0"
-// };
-
 const firebaseConfig = {
-  apiKey: "AIzaSyAeniI2mlhf_8tBjVvDeAO01D2FxaBy8Wk",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "control-your-money-spend.firebaseapp.com",
   projectId: "control-your-money-spend",
   storageBucket: "control-your-money-spend.appspot.com",
-  messagingSenderId: "644917493070",
-  appId: "1:644917493070:web:277820efefc066df04f21f",
+  messagingSenderId: process.env.REACT_APP_MESSAGE_ID,
+  appId: process.env.REACT_APP_APP_ID,
   measurementId: "G-K7FR2HZLC0"
 };
-
 
 // New firebase config 
 // initialize the app
