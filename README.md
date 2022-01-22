@@ -31,7 +31,7 @@
     >>> To achieve the maximum benefits for a financial app, I added features like a normal calculator and loan calculator or credit calculator as when many of us will use any financial app searching about this kind of features. 
 
 
-## How it's looking on live? User Data
+## How it's looking on live?
 
 - [Golive](https://control-your-money-spend.web.app/)
 
@@ -96,11 +96,11 @@ npm install
 
 ## Contributing 🧲:
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+- Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+- Please make sure to update tests as appropriate.
 
-If you like my work consider to star the project and follow my account for more content like that.
+- If you like my work consider to star the project and follow my account for more content like that.
 
 ## License 🔑:
 [MIT](https://choosealicense.com/licenses/mit/)
