@@ -13,9 +13,12 @@ function ChartShow(props) {
     const date = new Date();
     let year = date.getFullYear();
 
+
     let spendData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     let earnData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    // console.log(props.total);
 
     props.total.forEach((doc) => {
         // console.log(doc);
@@ -31,23 +34,9 @@ function ChartShow(props) {
             earnData[month] = 0;
         }else {
             // handle spend money
-            if (spendData[month] === 0) { 
-                spendData[month] = spendValue;
-            } else if (spendData[month] > 0) {
-                let addingSpendValues = spendValue + spendData[month];
-                spendData[month] = addingSpendValues;
-            }else{
-                console.log('Sorry Data Error');
-            } 
+            spendData[month] = spendData[month] + spendValue;
             // handle earn money.
-            if (earnData[month] === 0) {
-                earnData[month] = earnValue;
-            } else if (earnData[month] > 0) {
-                let addingEarnValues = earnValue + earnData[month];
-                earnData[month] = addingEarnValues;
-            } else {
-                alert("sorry there is porblem with data for monthly chart.");
-            }
+            earnData[month] = earnData[month] + earnValue;
         }
 
     });    
@@ -79,13 +68,22 @@ function ChartShow(props) {
         <div className="chartShow">
             <Bar
                 data={data} 
-                height={350}
-                width={400}
+                // height={350}
+                // width={400}
                 options={{
                     maintainAspectRatio: false,
+                    responsive: true,
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#d3d3d3'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#d3d3d3'
+                            }
                         }
                     }
                 }}    

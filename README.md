@@ -1,8 +1,8 @@
 # Money Tracker (Version 2)✌🏻:
 
-- Money Tracker is a web app that will help users to track spent or earned money on a daily and monthly basis by using interactive charts, This will be tablets and PCs version because I'm planning for a separate app for mobile.
+- Money Tracker is a web app that will help users to track spent or earned money on a daily and monthly basis by using interactive charts.
 
-#### Version (2) Updates 🧨💣🧨:
+#### Version (2) Updates 🧨💣🧨 Jan 22, 2022:
 
 - Updates Firebase to version 9.
 - Fix random problems with the normal Calculator.
@@ -10,11 +10,24 @@
 - Fix charts to be more responsive with different dates(months) change OR years.
 - Apply some changes for the UI (More coming in the same version).
 
+#### Latest Update May 5, 2022:
+
+- Update the percentage of use component and use SVG for more flexibility and reusable.
+- Update the UI for the app by adding animation to sidebar and update some colors.
+- The app now more responsive with different devices.
+- Fix bugs with the update user profile component (Form validation), Adding image loading progress-bar for better user interaction.
+- improve the logic used inside charts and update the some css inside.
+
 
 ## Disclaimer 🎙:
 
-- the Deployment version will be the updated one.
-- Sorry for any inconvenience.
+- The Deployment version will be the latest one.
+- Thanks for Firebase --> my project used Firestore & Storage & Authentication and Hosting.
+- Next Update will include: 💥⚡️
+  - PWA transformation.
+  - Using JSON WEB TOKEN.
+  - Update the Register form which will improve the user experience.
+  - Using MongoDB and Node.js to create new users and for future features.
 
 
 ## Summary:
@@ -42,11 +55,6 @@
 https://user-images.githubusercontent.com/57454543/130133430-93fe8578-e427-4596-a5aa-e23309aa47e9.mp4
 
 
-## Note 📝:
-
-- I used Firebase --> Firestore & Storage and Authentication.
-
-
 ## Technology Used 🛠:
 
 - React,
@@ -55,6 +63,7 @@ https://user-images.githubusercontent.com/57454543/130133430-93fe8578-e427-4596-
 - Aos,
 - Firebase,
 - chart.js,
+- react-chartjs-2,
 - redux,
 - redux-toolkit,
 - react-tooltip,
@@ -82,6 +91,7 @@ npm install
     "@reduxjs/toolkit": "^1.7.1",
     "aos": "^2.3.4",
     "chart.js": "^3.7.0",
+    "dotenv": "^16.0.0",
     "expr-eval": "^2.0.2",
     "firebase": "^9.6.3",
     "react": "^17.0.2",

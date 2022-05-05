@@ -46,17 +46,6 @@ function Register() {
                         console.log('data updated');
                         navigate('/');
                     });
-
-                    // db.collection('users').doc(auth.user.uid && auth.user.uid).set({
-                    //     email: auth.user.email,
-                    //     photo: '',
-                    //     fullname: '',
-                    //     mobile: '',
-                    //     gender: '',
-                    //     country: '',
-                    //     totalEarn: 0,
-                    //     totalSpend: 0
-                    // }, { merge: true });
                 }
             })
             .catch(error => alert(error.message));

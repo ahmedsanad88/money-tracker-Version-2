@@ -1,6 +1,5 @@
 .balance {
     width: 100%;
-    /* max-width: 1400px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,50 +32,23 @@
 }
 
 .remainBalance {
-    background-image: -webkit-linear-gradient(to top, #007adf 0%, #02b08d 100%);
-    background-image: linear-gradient(to top, #007adf 0%, #02b08d 100%);
-    background-size: 400% 400%;
-    background-position: 50% 50%;
-    animation: moveBg 5s infinite linear;
+    background-color: #003e70;
+    background-image: -webkit-linear-gradient(-225deg, #003e70 0%, #007adf 100%);
+    background-image: linear-gradient(-225deg, #003e70 0%, #007adf 100%);
 }
 
 
 .totalSpend {
-    background-image: -webkit-linear-gradient(-225deg, #A445B2 0%, #D41872 52%, #FF0066 100%);
-    background-image: linear-gradient(-225deg, #A445B2 0%, #D41872 52%, #FF0066 100%);
-    background-size: 400% 400%;
-    background-position: 50% 50%;
-    animation: moveBg 5s infinite linear;
+    background-color: #861657;
+    background-image: -webkit-linear-gradient(-225deg, #861657 0%, #ffa69e 100%);
+    background-image: linear-gradient(-225deg, #861657 0%, #ffa69e 100%);
 }
+
 
 .earn {
+    background-color: #2e0372;
     background-image: -webkit-linear-gradient(-225deg, #2e0372 0%, #5500de 100%);
     background-image: linear-gradient(-225deg, #2e0372 0%, #5500de 100%);
-    background-size: 400% 400%;
-    background-position: 50% 50%;
-    animation: moveBg 5s infinite linear;    
-}
-
-@keyframes moveBg {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    25% {
-        background-position: 50% 50%;
-    }
-
-    50% {
-        background-position: 100% 100%;
-    }
-
-    75% {
-        background-position: 50% 50%;
-    }
-
-    100% {
-        background-position: 0% 0%;
-    }
 }
 
 .balance__img {
@@ -93,17 +65,10 @@
     margin-bottom: 15px;
 }
 
-.remainBalance__text h2 {
-    /* color: #bb9c11; */
-    color: white;
-}
-
-.totalSpend__text h2 {
-    color: white;
-}
-
+.remainBalance__text h2,
+.totalSpend__text h2,
 .earn__text h2 {
-    color: white !important;
+    color: white;
 }
 
 .remainBalance__text,.totalSpend__text,.earn__text {
@@ -117,27 +82,27 @@
 .totalSpend__text,
 .earn__text small {
     color: rgb(255, 255, 255);
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 
 /* mediaQuery */
 
-@media (min-width: 768px) and (max-width: 1024px) {}
+/* @media (min-width: 941px) and (max-width: 1080px) {} */
 
 /* 
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+/* @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {} */
 
 /* 
   ##Device = Low Resolution Tablets, Mobiles (Landscape)
   ##Screen = B/w 481px to 767px
 */
 
-@media (min-width: 481px) and (max-width: 940px) {
+@media (min-width: 768px) and (max-width: 1040px) {
     .balance {
         width: 100%;
         display: flex;
@@ -176,7 +141,7 @@
   ##Screen = B/w 320px to 479px
 */
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 220px) and (max-width: 767px) {
     .balance {
         width: 100%;
         display: flex;

@@ -35,25 +35,17 @@ function Login() {
         // auth.signInWithPopup(provider)
         signInWithPopup(auth, provider)
         .then((auth) => {
+            // console.log(auth);
             const docRef = doc(db, 'users', auth.user.uid);
             setDoc(docRef, {
-                email: auth.user.email                   
+                email: auth.user.email,
+                photo: auth.user.photoURL,
+                fullname: auth.user.displayName                   
             }).then(() => {
                 console.log('data updated');
                 navigate('/');
             });
 
-            // db.collection('users').doc(auth.user.uid && auth.user.uid).set({
-            //     email: auth.user.email,
-            //     photo: '',
-            //     fullname: '',
-            //     mobile: '',
-            //     gender: '',
-            //     country: '',
-            //     totalEarn: 0,
-            //     totalSpend: 0
-            // }, { merge: true });
-            // navigate('/');
         }).catch((error) => alert(error.message));
     };
     // using basic login form and google login used for make it easily for new or old user to user there google accounts.

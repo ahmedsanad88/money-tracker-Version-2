@@ -7,12 +7,9 @@ import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { useSelector } from 'react-redux';
 import "./Balance.css";
-// import db from '../firebase';
 
 
 function Balance() {
-
-    // const [userData, setUserData] = useState({});
 
     const user = useSelector(state => state.user.user);
 
@@ -22,28 +19,12 @@ function Balance() {
 
     // console.log(user.id);
 
-    // useEffect(() => {
-    //     const getdata = async () => {
-    //         let dataHolder = await db.collection('users').doc(user.id);
-    //         let doc = await dataHolder.get();
-    //         setUserData(doc.data())
-    //         // console.log(doc.data());
-    //     };
-        
-    //     getdata();
-    //     return () => {
-    //         console.log("data ready");
-    //     }
-    // }, []);
-
-    // console.log(userData);
-
     return (
         <div className="balance">
             <div className="balance__main">
                 <div className="remainBalance">
                     <div>
-                        <IconButton className="balance__img">
+                        <IconButton className="balance__img" aria-label='Remain Balance'>
                             <AccountBalanceWalletIcon className="img__size"/>
                         </IconButton>
                     </div>
@@ -54,7 +35,7 @@ function Balance() {
                 </div>
                 <div className="totalSpend">
                     <div>
-                        <IconButton className="balance__img">
+                        <IconButton className="balance__img" aria-label='Spent Money'>
                             <MoneyOffIcon className="img__size"/>
                         </IconButton>
                     </div>
@@ -65,7 +46,7 @@ function Balance() {
                 </div>
                 <div className="earn">
                     <div>
-                        <IconButton className="balance__img">
+                        <IconButton className="balance__img" aria-label='Earned Money'>
                             <MonetizationOnIcon className="img__size"/>
                         </IconButton>
                     </div>

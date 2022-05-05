@@ -1,35 +1,35 @@
 //jshint esversion:6
 
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import db from './firebase';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { firebaseApp } from "./firebase";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { login } from "../features/userSlice";
-import "./Profile.css";
-import { useNavigate } from 'react-router-dom';
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from 'react';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
+import db from './firebase';
+import "./Profile.css";
 
 
 function Profile() {
+    // progress state
+    const [progress, setProgress] = useState(0);
     // state which handle the returned image URL from firebase storage.
-    const [imageUrl, setImageUrl] = useState(null);
+    const [photo, setPhoto] = useState(null);
     // inputs states.
-    const [fullName, setFullName] = useState('');
-    const [number, setNumber] = useState('');
+    const [fullname, setFullname] = useState('');
+    const [mobile, setMobile] = useState('');
     const [gender, setGender] = useState('');
     const [country, setCountry] = useState('');
 
-    // console.log(fullName);
+    // Global array for input checker
+    let checkerObj = {};
+    let inputCounter = 0;
 
     // user state handler
     const user = useSelector(state => state.user.user);
-    const dispatch = useDispatch();
-
-    const navigate = useNavigate();
 
     // Contorl AOS animation..
     useEffect(() => {
@@ -57,88 +57,80 @@ function Profile() {
         // let image = document.getElementById('photo').files[0].name;
 
         // validate the data input.
-        if (fullName !== "" && country !== "" && imageUrl) {
-            if (validateImage) {
-                // collection reference which accept the database and collection name.
-                const colRef = collection(db, 'users');
-                const docRef = doc(colRef, user.id);
-                // const q = query(colRef, where('user.uid', "==", user.id));
-
-        // console.log(docRef);
-
-                setDoc(docRef, {
-                    email: user.email,
-                    photo: imageUrl,
-                    fullname: fullName,
-                    mobile: number? number : "",
-                    gender: gender ? gender : "",
-                    country: country,
-                    totalEarn: user.totalEarn,
-                    totalSpend: user.totalSpend
-                })
-                .then(() => {
-                    dispatch(login({
-                        id: user.id,
-                        email: user.email,
-                        photo: imageUrl,
-                        fullname: fullName,
-                        mobile: number? number : "",
-                        gender: gender ? gender : "",
-                        country: country,
-                        totalEarn: user.totalEarn,
-                        totalSpend: user.totalSpend
-                    })
-                    );
-                    // shown confirmation to user once data accepted.
-                    document.getElementById('success').style.display="block";
-                    setFullName('');
-                    setNumber('');
-                    setGender('');
-                    setCountry('');
-                    document.getElementById('photo').value = '';
-                    
-                    setTimeout(() => {
-                        document.getElementById('success').style.display="none";
-                    }, 1500);           
-                    setTimeout(() => {
-                        window.location.reload();
-                        navigate('/');
-                    }, 5000);                           
-                });
-
-                // db.collection('users').doc(user.id).set({
-                //     email: user.email,
-                //     photo: imageUrl,
-                //     fullname: fullName,
-                //     mobile: number? number : "",
-                //     gender: gender ? gender : "",
-                //     country: country,
-                //     totalEarn: user.totalEarn,
-                //     totalSpend: user.totalSpend
-                // }, { merge: true });
-                // console.log("user data updated"); 
-                // dispatch this data to update the customer details on the app.
-              
+        if(inputChecker()) {
+            if (inputCounter > 0) {
+                formUpdate();
             } else {
-                alert("Please use jpeg & jpg & png images");
+                alert("please fill the fields you need to update it.");
             }
-        } else {
-            alert("please fill at least your name and country and image");
+            inputCounter = 0;
+            checkerObj = {}
         }
-        /* 
+            /* 
             reload will help all new data to reflect on our app as static until client change our update them instead of using them through 
             state which will be effect through every transfer.
         */
     };
 
-    // disable all inputs until user request to edit them.
-    const enableEditing = () => {
-        document.getElementById('fullName').disabled = false;
-        document.getElementById('number').disabled = false;
-        document.getElementById('gender').disabled = false;
-        document.getElementById('country').disabled = false;
-        document.getElementById('photo').disabled = false;
-    };
+    // Function to check only the used input to update the user profile.
+    const inputChecker = () => {
+        if(fullname !== ""){
+            checkerObj.fullname = fullname;
+            inputCounter++;
+        }
+        if(mobile !== ""){
+            checkerObj.mobile = mobile;
+            inputCounter++;
+        }
+        if(gender !== ""){
+            checkerObj.gender = gender;
+            inputCounter++;
+        }
+        if(country !== ""){
+            checkerObj.country = country;
+            inputCounter++;
+        }
+        if(photo !== null){
+            if(validateImage) {
+                checkerObj.photo = photo;
+                inputCounter++;
+            }
+        }
+        return true;
+    }
+
+
+    // Communicate with the DB to update the user details.
+    const formUpdate = () => {
+        // collection reference which accept the database and collection name.
+        const colRef = collection(db, 'users');
+        const docRef = doc(colRef, user.id);
+
+        setDoc(docRef, {
+            email: user.email,
+            totalEarn: user.totalEarn === undefined ? "" : user.totalEarn,
+            totalSpend: user.totalSpend === undefined ? "" : user.totalSpend,
+            ...checkerObj
+        },{merge: true})
+        .then(() => {
+            // shown confirmation to user once data accepted.
+            document.getElementById('success').style.display="block";
+            setFullname('');
+            setMobile('');
+            setGender('');
+            setCountry('');
+            document.getElementById('photo').value = '';
+            
+            setTimeout(() => {
+                document.getElementById('success').style.display="none";
+            }, 1500);                                    
+        }).catch((error) => {
+            document.getElementById('fail').style.display="block";
+            setTimeout(() => {
+                document.getElementById('fail').style.display="none";
+            }, 1500);
+        });        
+    }
 
     // validate the image
     const validateImage = async () => {
@@ -160,16 +152,42 @@ function Profile() {
         }
         
         //set storage option by using firebase storage to save the image and get the url only an deal with it.
-        // const storageRef = firebaseApp.storage().ref();
         const storage = getStorage(firebaseApp);
         const storageRef = ref(storage, file.name);
-        // const fileRef = storageRef.child(file.name);
-        // await fileRef.put(file);
-        const uploadTask = await uploadBytesResumable(storageRef, file);
-        setImageUrl(await getDownloadURL(storageRef));
+
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        document.getElementById('show_status').style.display='flex';
+        // check the status of uploading.
+        uploadTask.on('state_changed', 
+            (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const loading = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setProgress(Math.floor(loading));
+                if(loading >= 100){
+                    document.getElementById('uploadDone').style.display='inline-block';
+                    setTimeout(() => {
+                        document.getElementById('show_status').style.display='none';
+                        setProgress(0);
+                        document.getElementById('uploadDone').style.display='none';
+                    }, 3000);
+                }
+            }, 
+            (error) => {
+                // Handle unsuccessful uploads
+                alert({"Upload issue": error.message});
+                return false;
+            }, 
+            () => {
+                // Handle successful uploads on complete
+                getDownloadURL(storageRef).then((downloadURL) => {
+                    setPhoto(downloadURL);
+                });
+                return true;
+            }
+        );
         // setImageUrl(await uploadTask.getDownloadURL());
-        document.getElementById('submitData').classList.remove("btnDeactivate");
-        return true;
     };
     // console.log(imageUrl);
     
@@ -182,29 +200,24 @@ function Profile() {
             <div className="profileStatus">
                 <div id="success" className="succeed">
                     <p>Your Data Updated successfully.🤗</p>
-                    <p>Will tranfer you to home page 🏠 within 5 Seconds.🤗</p>
                 </div>
                 <div id="fail" className="failed">
-                    <p>Problem happened while update your data please try again.😟</p>
+                    <p>Problem happened while update your data please try again.😪</p>
                 </div>
             </div>
             {/* using control form */}
                 <form id="userForm">
                     <div className="input_style">
                         <label htmlFor="fullName">FULL NAME</label>
-                        <input disabled id="fullName" type="text" name="name" required onChange={(e) => setFullName(e.target.value)} value={fullName}/>
-                    </div>
-                    <div className="input_style">
-                        <label htmlFor="email">EMAIL</label>
-                        <input disabled id="email" type="email" name="email" value={user?.email}/>
+                        <input  id="fullName" type="text" name="name" required onChange={(e) => setFullname(e.target.value)} value={fullname}/>
                     </div>
                     <div className="input_style">
                         <label htmlFor="number">PHONE</label>
-                        <input disabled id="number" type="text" name="phone" onChange={(e) => setNumber(e.target.value)} value={number}/>
+                        <input id="number" type="text" name="phone" onChange={(e) => setMobile(e.target.value)} value={mobile}/>
                     </div>
                     <div className="input_style">
                         <label htmlFor="gender">GENDER</label>
-                        <select disabled id="gender" name="gender" onChange={(e) => setGender(e.target.value)} value={gender}>
+                        <select id="gender" name="gender" onChange={(e) => setGender(e.target.value)} value={gender}>
                             <option value="">Choose One</option>
                             <option value="MALE">MALE</option>
                             <option value="FEMALE">FEMALE</option>
@@ -212,15 +225,19 @@ function Profile() {
                     </div>
                     <div className="input_style">
                         <label htmlFor="country">COUNTRY</label>
-                        <input disabled id="country" type="text" name="country" required onChange={(e) => setCountry(e.target.value)} value={country}/>
+                        <input id="country" type="text" name="country" required onChange={(e) => setCountry(e.target.value)} value={country}/>
                     </div>
                     <div className="input_style img_style">
                         <label htmlFor="photo">PROFILE IMAGE(png or jpg)</label>
-                        <input disabled id="photo" type="file" name="image" accept="image/png, image/jpeg" onChange={validateImage} required />
+                        <input  id="photo" type="file" name="image" accept="image/png, image/jpeg" onChange={validateImage} required />
+                    </div>
+                    <div id='show_status'>
+                        <progress value={progress} max="100" />
+                        <small className='percentageText'>{progress}%</small>
+                        <CheckCircleIcon id='uploadDone' style={{ color: 'green', marginLeft: '10px' }} />
                     </div>
                     <div>
-                        <input id="submitData" className='btnDeactivate' type="submit" value="SAVE" onClick={(e) => updateUserData(e)}/>
-                        <input id="editData" type="reset" value="EDIT" onClick={enableEditing}/>
+                        <input id="submitData" type="submit" value="SAVE" onClick={(e) => updateUserData(e)}/>
                     </div>
                 </form>
                 <div className="form_description">

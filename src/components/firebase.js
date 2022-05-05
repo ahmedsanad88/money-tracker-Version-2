@@ -9,6 +9,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "control-your-money-spend.firebaseapp.com",
@@ -18,6 +19,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: "G-K7FR2HZLC0"
 };
+
 
 // New firebase config 
 // initialize the app

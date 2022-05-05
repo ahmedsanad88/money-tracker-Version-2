@@ -16,13 +16,9 @@ function NormalCalculator() {
                 setOperand([...operand]);
                 break;
             case ('point'):
-                // if (checkPoints()) {
-                //     alert('Please don not use double dots.');
-                // }else {
                 operand.push('.');
                 setOperand([...operand]);                
                 break;
-                // }
             case ('addNumbers'):
                 operand.push('+');
                 setOperand([...operand]);                
@@ -77,7 +73,6 @@ function NormalCalculator() {
                     }else {
                         // console.log("not found");
                         let joinNumbers = operand.join('');
-                        // if (joinNumbers)
                         // coverting the string into normal Math. calculation.
                         let parseNumber = Parser.parse(joinNumbers);
                         let evalutedNum = parseNumber.evaluate();

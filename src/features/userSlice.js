@@ -5,13 +5,13 @@ import { createSlice } from "@reduxjs/toolkit";
 // create initial state.
 const initialState = {
     user: {
-        id: null,
-        email: null,
-        photo: null,
-        fullname: null,
-        mobile: null,
-        gender: null,
-        country: null,
+        id: "",
+        email: "",
+        photo: "",
+        fullname: "",
+        mobile: "",
+        gender: "",
+        country: "",
         totalEarn: 0,
         totalSpend: 0
     },

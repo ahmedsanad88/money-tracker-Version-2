@@ -1,17 +1,20 @@
 //jshint esversion:6
 
 import React, { useEffect, useState } from 'react';
-import Percentage from "./dashboard/Percentage";
-import Balance from "./dashboard/Balance";
-import ChartShow from "./dashboard/ChartShow";
-import DailySpend from "./dashboard/DailySpend";
 import { useDispatch, useSelector } from 'react-redux';
-import db from './firebase';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { login } from "../features/userSlice";
-import "./Data.css";
+import { Avatar } from '@material-ui/core';
 import Aos from "aos";
 import "aos/dist/aos.css";
+
+import CirclePercentage from './dashboard/CirclePercentage';
+import DailySpend from "./dashboard/DailySpend";
+import ChartShow from "./dashboard/ChartShow";
+import Balance from "./dashboard/Balance";
+import { login } from "../features/userSlice";
+import db from './firebase';
+import "./Data.css";
+import logo from "../images/logo.png";
 
 
 
@@ -21,16 +24,13 @@ function Data() {
     const dispatch = useDispatch();
     
     const [total, setTotal] = useState([]);
+    // console.log(total);
 
     // prepare date
     const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    const todayDate = `${day}-${month}-${year}`;
-
-    // console.log(todayDate);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    // console.log(date.toLocaleDateString('en-US', options));
+    const todayDate = date.toLocaleDateString('en-US', options);
 
 
     let subTotalEarn = 0;
@@ -54,19 +54,6 @@ function Data() {
                 })));
             });
 
-            // const unsubscribe = 
-            // db.collection('users').doc(user.id).collection('dailyMonitor').orderBy('day','desc').onSnapshot((snapshot) => {
-            //     setTotal(snapshot.docs.map((doc) => ({
-            //     day: doc.data().day,
-            //     month: doc.data().month,
-            //     year: doc.data().year,
-            //     dailyEarn: doc.data().dailyEarn,
-            //     dailySpend: doc.data().dailySpend,
-            // })));
-            
-            // }, err => {
-            //     console.log(`Encountered error: ${err}`);
-            // });
         return () => unsubDocs();
         } else {
             console.log("There is no user Found");
@@ -113,26 +100,27 @@ function Data() {
         });
     }, []);
 
-
     return (
         <div className="data">
             <div className="data__main">
                 <div className="data__header">
-                    <h2>Dashboard <span id="todayDate">{todayDate}</span></h2>
+                    {/* <h2>Dashboard </h2> */}
+                    <Avatar className="logo" alt='logo' src={logo} />
+                    <h4 id="todayDate">{todayDate}</h4>
                 </div>
                 <div data-aos="fade-down" className="row1">
                     <Balance />
                 </div>
                 <div className='middleDiv'>
                     <div data-aos="fade-right" className="row2">
-                        <Percentage />
+                        <CirclePercentage />
                     </div>
                     <div data-aos="fade-left" className="row3">
-                        <ChartShow total={total} key={total.key}/>
+                        <ChartShow total={total} />
                     </div>
                 </div>
                 <div data-aos="fade-right" className="row4">
-                    <DailySpend total={total} key={total.key}/>
+                    <DailySpend total={total} />
                 </div>
             </div>
         </div>

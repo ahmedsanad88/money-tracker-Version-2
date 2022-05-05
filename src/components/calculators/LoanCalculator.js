@@ -52,7 +52,7 @@ function LoanCalculator() {
             <div className="loanCalculator_main">
                 <div className="loanCalculator_input">
                     <form>
-                        <input id="one" type="number" name="amount" placeholder="Total Loan" min="1" max="10000000" autoFocus required onChange={(e) => setValue1(e.target.value)}/>
+                        <input id="one" type="number" name="amount" placeholder="Total Loan" min="1" max="10000000" required onChange={(e) => setValue1(e.target.value)}/>
                         <input id="two" type="number" name="rate" placeholder="Interest Rate / Year(Max=40)" min="1" max="40" required onChange={(e) => setValue2(e.target.value)}/>
                         <input id="three" type="number" name="tenor" placeholder="Tenor / Months(Max=300)" min="1" max="300" required onChange={(e) => setValue3(e.target.value)}/>
                         <input id="submit" type="submit" value="CALCULATE" onClick={handleSubmit}/>

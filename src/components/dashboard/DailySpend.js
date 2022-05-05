@@ -18,7 +18,8 @@ function DailySpend(props) {
     const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     // filter data to get the current month data only if exist.
-    let currentMonthData = props.total.filter ((e) => {return e.month === monthNumber;});
+    let currentMonthData = props.total.filter ((e) => e.month === monthNumber);
+    // let currentMonthData = [{day: 1, dailySpend: 100}, {day: 1, dailySpend: 200}, {day: 5, dailySpend: 400}, {day: 10, dailySpend: 100}];
 
     // console.log(monthNumber);
     // console.log(currentMonthData);
@@ -27,30 +28,23 @@ function DailySpend(props) {
     // if not will fetch all data from backend and show spend money.
     if (currentMonthData.length === 0) {
         data.fill(0);
-    } else {
-        currentMonthData.forEach((doc) => {
-            let day = parseInt(doc.day) - 1;
-            let value = parseInt(doc.dailySpend);
-    
-            if (day === 0) {
-                data.fill(0);
-            }
-            if (data[day] === 0) { 
-                data[day] = value;
-            }else {
-                let addingValues = value + data[day];
-                data[day] = addingValues;
-            }
-    
-        });
     }
+    
+    currentMonthData?.forEach((doc) => {
+        let day = parseInt(doc.day) - 1;
+        let value = parseInt(doc.dailySpend);
 
+        // if(day === 0) {
+        //     data.fill(0);
+        // }
+        data[day] = data[day] + value;
+
+    });
              
-    // console.log(data);
-
     return (
         <div className="dailySpend">
             <Line
+                id="canvasOne"
                 data={{
                     labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
                     datasets: [
@@ -74,13 +68,20 @@ function DailySpend(props) {
                         },
                     ]
                 }} 
-                height={350}
-                width={400}
                 options={{
                     maintainAspectRatio: false,
+                    responsive: true,
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#d3d3d3'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#d3d3d3'
+                            }
                         }
                     }
                 }}    

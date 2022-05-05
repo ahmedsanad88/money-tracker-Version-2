@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../features/userSlice";
 import { auth } from './firebase';
 import db from './firebase';
-import { collection, getDoc, doc } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
+import { login } from "../features/userSlice";
+
 
 
 
@@ -34,7 +36,7 @@ function UserSidebar() {
     let location = useLocation();
     let name = location.pathname;
     useEffect(() => {
-        // hadnle which button has been clicked and adding clicked class style to it.
+        // handle which button has been clicked and adding clicked class style to it.
         allClickedBtn.forEach((btn) => {
             btn.classList.remove('clicked');
             if (btn.classList.contains(name)) {
@@ -45,17 +47,21 @@ function UserSidebar() {
 
     // function handle side manu to hide or expand it.
     const handleManu = () => {
-        document.getElementById('openSidebar').classList.toggle('expand');
         document.getElementById('middlediv').classList.toggle('hide');
         document.getElementById('topDiv').classList.toggle('topMove');
         document.getElementById('lowDiv').classList.toggle('bottomMove');
         document.getElementById('manuContainer').classList.toggle('alignClose');
-        if(document.getElementById('showSidebar').classList.contains('show')) {
-            document.getElementById('showSidebar').classList.toggle('show');        
-        } else {
+        document.getElementById('showSidebar').classList.remove('show');
+        
+        if(document.getElementById('openSidebar').classList.contains('expand')){
+            document.getElementById('openSidebar').classList.add('removeExpand');
+            document.getElementById('openSidebar').classList.remove('expand');
+        }else{
+            document.getElementById('openSidebar').classList.add('expand');
+            document.getElementById('openSidebar').classList.remove('removeExpand');
             setTimeout(() => {
-                document.getElementById('showSidebar').classList.toggle('show');
-            }, 1000);
+                document.getElementById('showSidebar').classList.add('show');
+            }, 400);        
         }
     };
 
@@ -70,33 +76,42 @@ function UserSidebar() {
     // fetching data from firebase by using useEffect & async
     useEffect(() => {
         const fetchUserData = async () => {
-            // const userData = db.collection('users').doc(user.id);
-            // const doc = await userData.get();
-            // if (!doc.exists) {
-            // console.log('No such document!');
-            // } else {
-            // // console.log(doc.data());
-            // setDoc(doc.data());
-            // }
+
             const colRef = collection(db, 'users');
             const userData = doc(colRef, user.id);
+            // real-time listen for user data update.
+            const unsub = onSnapshot(userData, (doc) => {
+                // console.log("Current data: ", doc.data());
+                setUserDoc(doc.data());
+                dispatch(login({
+                    id: user.id,
+                    ...doc.data()
+                    })
+                );
+            });
 
-            const docRef = await getDoc(userData);
-            // console.log(docRef.data());
-            if (!docRef.exists()) {
-                console.log('No such document!');
-            } else {
-                // console.log(doc.data());
-                setUserDoc(docRef.data());
-            }
+            // incase of read data once.
+            // const docRef = await getDoc(userData);
+            // // console.log(docRef.data());
+            // if (!docRef.exists()) {
+            //     console.log('No such document!');
+            // } else {
+            //     // console.log(doc.data());
+            //     setUserDoc(docRef.data());
+            //     dispatch(login({
+            //         id: user.id,
+            //         ...docRef.data()
+            //         })
+            //     )
+            // }
         };
-        // if (user.id) {
-            fetchUserData();
-        // } else {
-        //     console.log("No User found inside login");
-        // }
-    }, [user.id]);
-
+        if (user.id) {
+            return fetchUserData();
+        } else {
+            return console.log("Fetching Data");
+        }
+    }, [user.id, dispatch]);
+    
     return (
         <div id="openSidebar" className="userSidebar">
         {/* hamburger icon */}
@@ -108,19 +123,22 @@ function UserSidebar() {
             <div id="showSidebar" className="userSidebar__main">
                 <div className="userSidebar__user">
                     <div className="userSidebar__userImg">
-                        <Avatar alt="user image" src={userDoc.photo} />
+                        <Avatar className='userAvatar' alt={user? userDoc.fullname : user.fullname} src={user && userDoc?.photo} >{user ? user.fullname?.charAt(0).toUpperCase() : userDoc.fullname?.charAt(0).toUpperCase()}</Avatar>
                     </div>
                     <div className="userSidebar__userDetails">
                         <h3>{user? userDoc.fullname : "Name"}</h3>
-                        <h3 id="emailSpace">{user ? user.email : 'Email'}</h3>
-                        <h3>{user ? userDoc.country : 'country'}</h3>
+                        <h3 id="emailSpace">{user ? user.email : userDoc.email}</h3>
+                        <h3>{user ? userDoc.country : user.country}</h3>
                     </div>
                 </div>
                 {/* home page link */}
                 <div className="userSidebar__nav">
                     <div className="dashboard">
                         <IconButton id="home" className="IconBtn /" onClick={
-                            () => navigate("/")
+                            () => {
+                                    navigate("/");
+                                    handleManu();
+                                }
                         }>
                             <h4>Dashboard</h4>
                             <HomeIcon />
@@ -129,7 +147,10 @@ function UserSidebar() {
                     {/* update earn & spend data page link */}
                     <div className="dataEnter">
                         <IconButton id="udateData" className="IconBtn /updateData" onClick={
-                            () => navigate("/updateData")
+                            () => {
+                                    navigate("/updateData");
+                                    handleManu();
+                                }
                         }>
                             <h4>UpdateData</h4>
                             <DataUsageIcon />
@@ -138,7 +159,10 @@ function UserSidebar() {
                     {/* calculation page link */}
                     <div className="calc">
                         <IconButton id="calc" className="IconBtn /calculator" onClick={
-                            () => navigate("/calculator")
+                            () => {
+                                    navigate("/calculator");
+                                    handleManu();
+                                }
                         }>
                             <h4>Calculator</h4>
                             <PieChartIcon />
@@ -147,7 +171,10 @@ function UserSidebar() {
                     {/* Profile page link */}
                     <div className="profilePage">
                         <IconButton id="profile" className="IconBtn /profile" onClick={
-                            () => navigate("/profile")
+                            () => {
+                                    navigate("/profile");
+                                    handleManu();
+                                }
                         }>
                             <h4>Profile</h4>
                             <AccountCircleIcon />

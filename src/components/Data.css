@@ -1,249 +1,106 @@
 .data {
     flex: 1;
     min-height: 100vh;
+    padding: 10px 30px;
     margin-left: 75px;
     background-color: var(--main-bg);
+    z-index: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
 }
 
-.data::after {
-    content: '';
-    border: 20px solid hsla(229, 23%, 18%, 0.6);
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    z-index: 0;
+@media (min-width: 200px) and (max-width: 480px) {
+    .data {
+        padding: 10px 5px;
+    }
 }
 
 .data__main {
     width: 100%;
-    max-width: 1700px;
+    max-width: calc(100vw - 75px);
     height: 100%;
     display: grid;
-    /* grid-template-columns: 1fr, 2fr;
-    grid-template-rows: repeat(5, auto); */
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, auto);
-    /* grid-gap: 15px; */
     row-gap: 20px;
     z-index: 100;
 }
 
 .data__header {
-    /* grid-column-start: 1;
-    grid-column-end: 3; */
     width: 100%;
-    border-bottom: 1px solid hsl(229, 23%, 58%);
-    margin-bottom: 15px;
-    background-color: hsl(229, 23%, 18%);
-    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4);
+    max-width: 1500px;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
-}
-
-.data__header h2 {
-    font-size: 1.5rem;
-    color: var(--color);
-    padding-left: 20px;
-    letter-spacing: 3px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: #fff;
     text-transform: uppercase;
+    background-color: var(--side-bg);
+    letter-spacing: 3px;
     z-index: 100;
+    margin-inline: auto;
 }
 
-#todayDate {
-    font-size: 14px;
-    color: white;
-}
-
-.row1 {
-    /* grid-column-start: 1;
-    grid-column-end: 3; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 20px;
-}
-
-.middleDiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 20px;
-}
-
-.row2 {
+.data__header .logo {
     margin-right: 20px;
 }
 
+#todayDate {
+    font-size: 16px;
+    color: lightgreen;
+}
+
+.row1 {
+    width: 90%;
+    max-width: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+}
+
+.middleDiv {
+    width: 90%;
+    max-width: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+    gap: 20px;
+}
+
 .row3 {
-    flex: 1;
+    flex-grow: 1;
     display: flex;
     justify-content: flex-end;
 }
 
-/* .row2 {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.row3 {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 20px;
-} */
-
-.row4 {
-    /* grid-column-start: 1;
-    grid-column-end: 3; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 20px;
-}
-
-/* mediaquery */
-
-@media (min-width: 768px) and (max-width: 1024px) {}
-
-/* 
-  ##Device = Tablets, Ipads (landscape)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    .data__main {
-        overflow: scroll;
-    }
-
-}
-
-/* 
-  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-  ##Screen = B/w 481px to 767px
-*/
-
-@media (min-width: 481px) and (max-width: 767px) {}
-
-/* 
-  ##Device = Most of the Smartphones Mobiles (Portrait)
-  ##Screen = B/w 320px to 479px
-*/
-
-@media (min-width: 320px) and (max-width: 940px) {
-    .data {
-        flex: 1;
-        /* height: 100vh; */
-        background-color: var(--main-bg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        z-index: 0;
-        overflow: hidden;
-    }
-
-    .data__main {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        z-index: 100;
-        overflow: scroll;
-    }
-
-    .data__header {
-        width: 100%;
-        border-bottom: 1px solid hsl(229, 23%, 58%);
-        margin-bottom: 15px;
-        background-color: hsl(229, 23%, 18%);
-        box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4);
-        -webkit-box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-    }
-
-    .data__header h2 {
-        font-size: 1rem;
-        color: var(--color);
-        padding: 10px;
-        padding-left: 20px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        z-index: 100;
-    }
-
-    .row1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 7px;
-    }
-
+@media only screen and (max-width: 940px){
     .middleDiv {
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 7px;
     }
 
     .row2 {
-        margin-right: 0px;
-        margin-bottom: 20px;
-    }
-
-    .row3 {
-        flex: 1;
-    }
-
-    .row2, .row3 {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* .row2 {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 7px;
     }
 
     .row3 {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        display: flex;
+        width: 100%;
         justify-content: center;
-        align-items: center;
-        margin: 0px 7px;
-    } */
-
-    .row4 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 7px;
     }
+}
+
+
+.row4 {
+    width: 90%;
+    height: 100%;
+    max-width: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
 }

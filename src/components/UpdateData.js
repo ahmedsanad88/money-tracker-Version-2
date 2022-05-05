@@ -18,7 +18,9 @@ function UpdateData() {
 
     // getting the day and month as numbers...
     var date = new Date();
+    // return An integer number, between 1 and 31
     var daydate = date.getDate();
+    // return An integer number, between 0 and 11
     let currentMonth = date.getMonth();
     let year = date.getFullYear();
 
@@ -45,20 +47,6 @@ function UpdateData() {
         if (earnMoney > 0 || spendMoney > 0) {
 
             if (earnMoney !== "" && spendMoney !== "") {
-
-                // db.collection('users').doc(user.id).collection('dailyMonitor').add({
-                //     day: daydate,
-                //     month: currentMonth,
-                //     year: year,
-                //     dailyEarn: earnMoney,
-                //     dailySpend: spendMoney
-                // }).then(() => {
-                //     console.log('data saved');
-                //     setEarnMoney(0);
-                //     setSpendMoney(0);
-                // }
-                // ).catch(error => alert(error.message));
-
                 const userData = collection(db, 'users', user.id, 'dailyMonitor');
                 addDoc(userData, {
                     day: daydate,
@@ -76,7 +64,7 @@ function UpdateData() {
                     setTimeout(() => {
                         message.classList.remove('showMessage');
                         message.classList.add('scaleOut');
-                    },3000);
+                    },2000);
                 }).catch(error => alert(error.message));
 
             }else {
@@ -106,7 +94,7 @@ function UpdateData() {
                 <form>
                     <div className="input_container">
                         <div className="earnInput">
-                            <input type="number" name="earn" placeholder="Enter Numbers Only" min="0" max="10000000" autoFocus onChange={(e) => setEarnMoney(e.target.value)} value={earnMoney}/>
+                            <input type="number" name="earn" placeholder="Enter Numbers Only" min="0" max="10000000" onChange={(e) => setEarnMoney(e.target.value)} value={earnMoney}/>
                             <h2>EARN ($)</h2>
                         </div>
                         <div className="earnInput">
@@ -114,6 +102,7 @@ function UpdateData() {
                             <h2>DAILY SPENT ($)</h2>
                         </div>
                     </div>
+
                     {/* btn handle submit and reset form */}
                     <div className="btn">
                         <input type="submit" name="submit" value="UPDATE" onClick={(e) => handleMoney(e)}/>
