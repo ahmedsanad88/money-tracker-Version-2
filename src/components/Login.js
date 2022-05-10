@@ -25,6 +25,7 @@ function Login() {
         // auth.signInWithEmailAndPassword(email,password)
         signInWithEmailAndPassword(auth, email, password)
             .then((auth) => {
+                // console.log(auth);
                 // only pushing client to home page.
                 navigate('/');
             })

@@ -47,41 +47,36 @@ function App() {
 
   return (
     // using react router dom which will handle all react components along with user login or out.
+    // <Router>
+    //   <div className="app">
+    //     <Routes>
+    //       {user ? (<>
+    //         <Route exact path="/updateData" element={ [<UserSidebar />, <UpdateData />] }/>
+    //         <Route exact path="/calculator" element={ [<UserSidebar />, <Calculator />] }/>
+    //         <Route exact path="/profile" element={ [<UserSidebar />, <Profile />] } />
+    //         <Route exact path="/" element={ [<UserSidebar />, <Data />] } /> 
+    //         <Route exact path="/register" element={ <Navigate replace to='/' /> } />
+    //         <Route exact path="/login" element={ <Navigate replace to='/' /> }/>
+    //       </>) : (<>
+    //           <Route exact path="/register" element={ <Register /> } />
+    //           <Route exact path="/login" element={ <Login /> }/>
+    //           <Route exact path="/" element={ <Navigate replace to='/login' /> } />
+    //       </>)}
+    //     </Routes>
+    //   </div>
+    // </Router>
     <Router>
       <div className="app">
         <Routes>
-          <Route exact path="/updateData" element={user !== null ? [<UserSidebar />, <UpdateData />] : <Navigate replace to='/login' />}/>
-          <Route exact path="/calculator" element={user !== null ? [<UserSidebar />, <Calculator />] : <Navigate replace to='/login' />}/>
-          <Route exact path="/profile" element={user !== null ? [<UserSidebar />, <Profile />] : <Navigate replace to='/login' />} />
-          <Route exact path="/" element={user !== null ? [<UserSidebar />, <Data />] : <Navigate replace to='/login' />} /> 
+          <Route exact path="/updateData" element={user ? [<UserSidebar />, <UpdateData />] : <Navigate replace to='/login' />}/>
+          <Route exact path="/calculator" element={user ? [<UserSidebar />, <Calculator />] : <Navigate replace to='/login' />}/>
+          <Route exact path="/profile" element={user ? [<UserSidebar />, <Profile />] : <Navigate replace to='/login' />} />
+          <Route exact path="/" element={user ? [<UserSidebar />, <Data />] : <Navigate replace to='/login' />} /> 
           <Route exact path="/register" element={user === null ? <Register /> : <Navigate replace to='/' />} />
           <Route exact path="/login" element={user === null ? <Login /> : <Navigate replace to='/' />}/>
         </Routes>
       </div>
     </Router>
-    // {/* <Router>
-    //   <div className="app">
-    //   {user != null? 
-    //   <Routes>
-    //     <Route exact path="/updateData" element={<><UserSidebar /><UpdateData /></>}/>
-    //     <Route exact path="/calculator" element={<><UserSidebar /><Calculator /></>}/>
-    //     <Route exact path="/profile" element={[<UserSidebar />, <Profile />]} />
-    //     <Route exact path="/login" element={user.id ? <Navigate to="/" /> : <Login />}/>
-    //     <Route exact path="/" element={[<UserSidebar />, <Data />]} /> 
-          
-    //   </Routes>
-    //   :  
-    //   <Routes>
-    //     <Route exact path="/updateData" element={<Navigate to="/login" />} />
-    //     <Route exact path="/calculator" element={<Navigate to="/login" />} />
-    //     <Route exact path="/profile" element={<Navigate to="/login" />} />
-    //     <Route exact path="/" element={<Navigate to="/login" />} />
-    //     <Route exact path="/login" element={<Login />} />
-    //     <Route exact path="/register" element={<Register />} />
-    //   </Routes>
-    //   }
-    //   </div>
-    // </Router> */}
   );
 }
 
