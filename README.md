@@ -52,7 +52,9 @@
 ## Check it 📺:
 
 
-https://user-images.githubusercontent.com/57454543/130133430-93fe8578-e427-4596-a5aa-e23309aa47e9.mp4
+
+https://user-images.githubusercontent.com/57454543/166862889-4fa7b84f-7c5d-494d-846d-b2dcdb063f2f.mp4
+
 
 
 ## Technology Used 🛠:
