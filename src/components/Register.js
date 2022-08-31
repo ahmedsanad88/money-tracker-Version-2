@@ -80,6 +80,7 @@ function Register() {
     let passwordRegExp =
       /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).*$/g;
 
+    // Validation for email
     if (emailRegexp.test(email)) {
       // validate the password
       if (passwordRegExp.test(password)) {
