@@ -1,189 +1,190 @@
 .userSidebar {
-    flex: 0.05;
+  flex: 0.05;
+  max-width: 220px;
+  position: fixed;
+  padding: 10px;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 1px solid rgba(190, 190, 190, 0.1);
+  background-color: var(--side-bg);
+  z-index: 500;
+}
+
+.expand {
+  /* flex: 0.25; */
+  animation: expanding 0.5s forwards linear;
+}
+@keyframes expanding {
+  from {
+    width: 67px;
+  }
+  to {
+    width: 220px;
+  }
+}
+
+.removeExpand {
+  animation: noExpand 0.5s forwards linear;
+}
+
+@keyframes noExpand {
+  from {
+    width: 220px;
+  }
+  to {
+    width: 67px;
+  }
+}
+
+.manu {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  cursor: pointer;
+  height: 70px;
+}
+
+.manu div {
+  width: 40px;
+  height: 5px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 3px;
+  transition: transform 0.5s linear;
+}
+
+.hide {
+  /* display: none; */
+  transform: translateX(-1000%);
+  overflow-x: hidden;
+}
+
+.topMove {
+  transform: rotate(45deg) translateY(15px);
+}
+
+.bottomMove {
+  transform: rotate(-45deg) translateY(-15px);
+}
+
+.alignClose {
+  transform: translate(11px);
+}
+
+.userSidebar__main {
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+  display: none;
+  /* transition: all 500s ease-in-out; */
+}
+
+.show {
+  display: flex;
+  animation: textAnime 0.3s forwards linear;
+}
+
+@keyframes textAnime {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.userSidebar__user {
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userSidebar__userImg {
+  margin: 0.7em;
+}
+
+.userAvatar {
+  color: white !important;
+  background-color: #4416b0 !important;
+  border: 2px solid lightseagreen;
+}
+
+.userSidebar__userDetails {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: lightseagreen;
+  font-size: 14px;
+}
+
+.userSidebar__userDetails h3 {
+  font-weight: 500;
+  padding-bottom: 15px;
+  text-align: left;
+}
+
+#emailSpace {
+  width: 100%;
+  -webkit-word-break: break-all;
+  -moz-word-break: break-all;
+  -o-word-break: break-all;
+  word-break: break-all;
+}
+
+.userSidebar__nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.IconBtn {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-radius: 0px !important;
+  color: var(--color) !important;
+  background-color: hsla(229, 23%, 23%, 0.5) !important;
+  margin-bottom: 10px !important;
+  font-size: 1.2rem !important;
+}
+
+.IconBtn:hover {
+  background-color: var(--color) !important;
+  color: white !important;
+}
+
+.clicked {
+  color: white !important;
+  background-color: var(--color) !important;
+}
+
+.userSidebar__logout {
+  width: 100%;
+}
+
+@media screen and (max-width: 320px) {
+  .userSidebar {
     max-width: 220px;
     position: fixed;
     padding: 10px;
     display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    border-right: 1px solid rgba(190, 190, 190, 0.1);
-    background-color: var(--side-bg);
-    z-index: 500;
-}
-
-.expand {
-    /* flex: 0.25; */
-    animation: expanding 0.5s forwards linear;
-}
-@keyframes expanding {
-    from{
-        width: 67px;
-    }
-    to{
-        width: 220px;
-    }
-}
-
-.removeExpand {
-    animation: noExpand 0.5s forwards linear;
-}
-
-@keyframes noExpand {
-    from{
-        width: 220px;
-    }
-    to{
-        width: 67px;
-    }
-}
-
-.manu {
-    /* width: 100%; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    cursor: pointer;
-    height: 70px;
-}
-
-.manu div {
-    width: 40px;
-    height: 5px;
-    background-color: white;
-    border-radius: 5px;
-    margin: 3px;
-    transition: transform 0.5s linear;
-}
-
-.hide {
-    /* display: none; */
-    transform: translateX(-1000%);
-    overflow-x: hidden;
-}
-
-.topMove {
-    transform: rotate(45deg) translateY(15px);
-}
-
-.bottomMove {
-    transform: rotate(-45deg) translateY(-15px);
-}
-
-.alignClose {
-    transform: translate(11px);
-}
-
-.userSidebar__main {
-    height: 98%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    opacity: 0;
-    display: none;
-    /* transition: all 500s ease-in-out; */
-}
-
-.show {
-    display: flex;
-    animation: textAnime 0.3s forwards linear;
-}
-
-@keyframes textAnime {
-    from {
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-
-.userSidebar__user {
-    color: var(--color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.userSidebar__userImg {
-    margin: 10px;
-}
-
-.userAvatar {
-    color: white !important;
-    background-color: #4416B0 !important;
-    border: 2px solid rgba(255, 255, 255, 1);
-}
-
-.userSidebar__userDetails {
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: lightgray;
-    font-size: 14px;
-}
-
-.userSidebar__userDetails h3 {
-    padding-bottom: 15px;
-}
-
-#emailSpace {
-    width: 100%;
-    -webkit-word-break: break-all;
-    -moz-word-break: break-all;
-    -o-word-break: break-all;
-    word-break: break-all;
-}
-
-.userSidebar__nav {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.IconBtn {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border-radius: 0px !important;
-    color: var(--color) !important;
-    background-color: hsla(229, 23%, 23%, 0.5) !important;
-    margin-bottom: 10px !important;
-    font-size: 1.2rem !important;
-}
-
-.IconBtn:hover {
-    background-color: var(--color) !important;
-    color: white !important;
-}
-
-.clicked {
-    color: white !important;
-    background-color: var(--color) !important;
-}
-
-.userSidebar__logout {
-    width: 100%;
-}
-
-@media screen and (max-width: 320px) {
-    .userSidebar {
-        max-width: 220px;
-        position: fixed;
-        padding: 10px;
-        display: flex;
-        min-height: 100vh;
-        overflow-y: auto;
-    }
-    .IconBtn {
-        font-size: 1rem !important;
-    }
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .IconBtn {
+    font-size: 1rem !important;
+  }
 }

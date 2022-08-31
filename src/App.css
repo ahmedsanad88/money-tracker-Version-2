@@ -1,19 +1,18 @@
 :root {
-    --main-bg: hsl(229, 23%, 23%);
-    /* --main-bg:  */
-    --side-bg: hsl(228, 38%, 15%);
-    --color: hsl(210, 100%, 49%);
+  --main-bg: hsl(229, 23%, 23%);
+  --side-bg: hsl(228, 38%, 15%);
+  --color: hsl(210, 100%, 49%);
+  --white: rgb(255, 255, 255);
 }
-
 
 * {
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-
 .app {
-    display: flex;
+  display: flex;
 }

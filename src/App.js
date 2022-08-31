@@ -1,82 +1,102 @@
 //jshint esversion:6
-
-import React, { useEffect } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import { auth } from './components/firebase';
+import React, { useLayoutEffect, Suspense, lazy } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { useSelector, useDispatch } from "react-redux";
+import { auth } from "./components/firebase";
+import { signOut } from "firebase/auth";
 import {
-  BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { login, logout } from "./features/userSlice";
-import UserSidebar from "./components/UserSidebar";
+
+import "./App.css";
+import Loader from "./components/loader/Loader";
 import Data from "./components/Data";
-import UpdateData from "./components/UpdateData";
-import Calculator from "./components/Calculator";
-import Profile from "./components/Profile";
-import Register from "./components/Register";
+import UserSidebar from "./components/UserSidebar";
 import Login from "./components/Login";
-import './App.css';
+import NotFound from "./components/notFound/NotFound";
+import ErrorFallback from "./components/ErrorBoundary/ErrorFallback";
+
+// lazy loading.
+const UpdateData = lazy(() => import("./components/UpdateData"));
+const Calculator = lazy(() => import("./components/Calculator"));
+const Profile = lazy(() => import("./components/Profile"));
+const Register = lazy(() => import("./components/Register"));
 
 function App() {
-  // user state handler.
-  const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
-  // check if user is authurized then will update the state.
-  useEffect(() => {
+  // check if the user is authorized or not.
+  useLayoutEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        dispatch(login({
-          id: authUser.uid,
-          email: authUser.email,
-          photo: null,
-          fullname: null,
-          mobile: null,
-          gender: null,
-          country: null,
-          totalEarn: 0,
-          totalSpend: 0
-        })
+        localStorage.setItem("isLoggedIn", true);
+        dispatch(
+          login({
+            ...user,
+            id: authUser.uid,
+            email: authUser.email,
+          })
         );
         // console.log(authUser);
       } else {
-        // logout if process filed for register or login.
-        dispatch(logout());  
+        // logout if process failed for register or login.
+        signOut(auth)
+          .then(() => {
+            dispatch(logout());
+            localStorage.removeItem("isLoggedIn");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     });
   }, [dispatch]);
 
-  // console.log(user);
+  // user state handler.
+  let user = useSelector((state) => state.user.user);
+
+  const isAuth = localStorage.getItem("isLoggedIn") || "";
 
   return (
-    // using react router dom which will handle all react components along with user login or out.
-    // <Router>
-    //   <div className="app">
-    //     <Routes>
-    //       {user ? (<>
-    //         <Route exact path="/updateData" element={ [<UserSidebar />, <UpdateData />] }/>
-    //         <Route exact path="/calculator" element={ [<UserSidebar />, <Calculator />] }/>
-    //         <Route exact path="/profile" element={ [<UserSidebar />, <Profile />] } />
-    //         <Route exact path="/" element={ [<UserSidebar />, <Data />] } /> 
-    //         <Route exact path="/register" element={ <Navigate replace to='/' /> } />
-    //         <Route exact path="/login" element={ <Navigate replace to='/' /> }/>
-    //       </>) : (<>
-    //           <Route exact path="/register" element={ <Register /> } />
-    //           <Route exact path="/login" element={ <Login /> }/>
-    //           <Route exact path="/" element={ <Navigate replace to='/login' /> } />
-    //       </>)}
-    //     </Routes>
-    //   </div>
-    // </Router>
-    <Router>
-      <div className="app">
-        <Routes>
-          <Route exact path="/updateData" element={user ? [<UserSidebar />, <UpdateData />] : <Navigate replace to='/login' />}/>
-          <Route exact path="/calculator" element={user ? [<UserSidebar />, <Calculator />] : <Navigate replace to='/login' />}/>
-          <Route exact path="/profile" element={user ? [<UserSidebar />, <Profile />] : <Navigate replace to='/login' />} />
-          <Route exact path="/" element={user ? [<UserSidebar />, <Data />] : <Navigate replace to='/login' />} /> 
-          <Route exact path="/register" element={user === null ? <Register /> : <Navigate replace to='/' />} />
-          <Route exact path="/login" element={user === null ? <Login /> : <Navigate replace to='/' />}/>
-        </Routes>
-      </div>
-    </Router>
+    // using react router dom which will handle all react routes and components.
+    // Error Boundary will improve the user experience by catching error that
+    // effect on the state change and handle it.
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => {
+        window.location.reload();
+      }}
+    >
+      <Router>
+        <div className="app">
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              {isAuth ? (
+                <>
+                  <Route path="/" element={<UserSidebar />}>
+                    <Route index element={<Data />} />
+                    <Route exact path="updateData" element={<UpdateData />} />
+                    <Route exact path="calculator" element={<Calculator />} />
+                    <Route exact path="profile" element={<Profile />} />
+                    <Route path="*" element={<Navigate replace to="/" />} />
+                  </Route>
+                </>
+              ) : (
+                <>
+                  <Route exact path="/register" element={<Register />} />
+                  <Route exact path="/login" element={<Login />} />
+                  <Route path="*" element={<Navigate replace to="/login" />} />
+                </>
+              )}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 

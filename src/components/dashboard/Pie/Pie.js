@@ -1,7 +1,7 @@
-import React from 'react';
-import './Pie.css';
+import React from "react";
+import "./Pie.css";
 
-// create the percentage circle which show to the client the percentage og used cash.
+// create the percentage circle which show to the client the percentage of used cash.
 
 // Func. to handle the percentage.
 const cleanPercentage = (percentage) => {
@@ -49,26 +49,26 @@ const Text = ({ percentage }) => {
 
 // Create the pie component to reuse it in any place cross our app.
 const Pie = ({ percentage, colour }) => {
-    const pct = cleanPercentage(percentage);
+  const pct = cleanPercentage(percentage);
   return (
     <svg width={200} height={200}>
-    {/* Create a gradient for the percentage circle */}
+      {/* Create a gradient for the percentage circle */}
       <defs>
         <linearGradient id="linear" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#e12279"/>
-          <stop offset="25%" stopColor="#7209b7"/>
-          <stop offset="50%" stopColor="#3d22b6"/>
-          <stop offset="75%" stopColor="#4361ee"/>
-          <stop offset="100%" stopColor="#5ccef1"/>
+          <stop offset="0%" stopColor="#e12279" />
+          <stop offset="25%" stopColor="#7209b7" />
+          <stop offset="50%" stopColor="#3d22b6" />
+          <stop offset="75%" stopColor="#4361ee" />
+          <stop offset="100%" stopColor="#5ccef1" />
         </linearGradient>
       </defs>
       <g transform={`rotate(-90 ${"100 100"})`}>
         <Circle colour="#272C3F" />
         <Circle colour="url(#linear)" pct={pct} />
       </g>
-      <Text percentage={(100 - pct)} />
+      <Text percentage={100 - pct} />
     </svg>
-  )
-}
+  );
+};
 
 export default Pie;
