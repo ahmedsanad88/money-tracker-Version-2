@@ -29,22 +29,20 @@ function ChartShow(props) {
 
   let earnData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  props.total.forEach((doc) => {
-    let month = parseInt(doc.month);
-    let spendValue = parseInt(doc.dailySpend);
-    let earnValue = parseInt(doc.dailyEarn);
-    let dataYear = parseInt(doc.year);
+  const filterYear = props?.total?.filter((obj) => +obj.year === +year);
 
-    if (year > dataYear || year < dataYear) {
-      spendData[month] = 0;
-      earnData[month] = 0;
-    } else {
+  filterYear.length > 0 &&
+    filterYear.forEach((doc) => {
+      let month = parseInt(doc.month);
+      let spendValue = parseInt(doc.dailySpend);
+      let earnValue = parseInt(doc.dailyEarn);
+      // let dataYear = parseInt(doc.year);
+
       // handle spend money
       spendData[month] = spendData[month] + spendValue;
       // handle earn money.
       earnData[month] = earnData[month] + earnValue;
-    }
-  });
+    });
 
   const data = {
     labels: [
@@ -85,8 +83,6 @@ function ChartShow(props) {
     <div className="chartShow">
       <Bar
         data={data}
-        // height={350}
-        // width={400}
         options={{
           maintainAspectRatio: false,
           responsive: true,
