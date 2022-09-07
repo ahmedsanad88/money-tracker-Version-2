@@ -15,6 +15,12 @@
   z-index: 500;
 }
 
+@media screen and (max-width: 767px) {
+  .error__container {
+    max-width: 50%;
+  }
+}
+
 .success {
   background-color: rgba(0, 128, 0, 0.7);
 }
